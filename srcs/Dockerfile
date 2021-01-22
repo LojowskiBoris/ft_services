@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM alpine:3.13
 
 MAINTAINER blojowsk
 

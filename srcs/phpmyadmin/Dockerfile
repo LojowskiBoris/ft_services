@@ -1,6 +1,6 @@
-#ftps
+#phpmyadmin
 FROM alpine:3.13
 
 MAINTAINER blojowsk
 
-EXPOSE 21
+EXPOSE 5000
