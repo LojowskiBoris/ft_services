@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-conf="/etc/nginx/sites-available/monsite.conf"
+conf="/etc/nginx/http.d/monsite.conf"
 autoindex="$(grep 'autoindex' $conf)"
 if [ "$autoindex" = "	autoindex on;" ]
 then
