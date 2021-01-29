@@ -1,5 +1,10 @@
 faire index.html
 
+kubctl get nodes
+kubctl describe nodes minikube(exple) (= docker inspect container)
+kubectl apply -f https://k8s.io/examples/debug/counter-pod.yaml
+kubectl logs "podsname"
+
 docker build -t img .
 docker run -tid --name cont img
 docker exec -ti cont sh
