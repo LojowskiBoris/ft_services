@@ -4,10 +4,15 @@ MAINTAINER blojowsk
 
 COPY monsite.conf set_autoindex.sh /
 
+VOLUME /sys/fs/cgroup
+
 EXPOSE 80 443
 
 RUN apk update && apk upgrade \
-&& apk add nginx openrc openssl sed grep vim \
+&& apk add --no-cache nginx openrc openssl sed grep vim \
+&& mkdir -p /run/openrc \
+&& touch /run/openrc/softlevel \
+&& mkdir -p /run/nginx \
 && rm /etc/nginx/http.d/default.conf \
 && mv /monsite.conf /etc/nginx/http.d \
 && mkdir /var/www/monsite \
@@ -17,7 +22,7 @@ RUN apk update && apk upgrade \
     -out /etc/nginx/ssl/monsite.fr.crt \
     -subj "/C=FR/ST=RHONE/L=LYON/O=42/OU=Dev/CN=www.monsite.fr"
 
-#CMD nginx -g 'daemon off;'
+CMD ["nginx", "-g", "daemon off;"]
 
 #&& apt-get install -y vim nginx wget git php-fpm mariadb-server php7.3-mysql \
 #&& rm /etc/nginx/sites-available/default \

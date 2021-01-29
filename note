@@ -1,3 +1,5 @@
+faire index.html
+
 docker build -t img .
 docker run -tid --name cont img
 docker exec -ti cont sh

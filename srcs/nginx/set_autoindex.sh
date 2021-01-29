@@ -10,4 +10,4 @@ else
 	sed -i 's/autoindex off;/autoindex on;/' "$conf";
 	echo "autoindex on";
 fi
-service nginx reload
+rc-service nginx reload
