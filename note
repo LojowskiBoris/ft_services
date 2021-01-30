@@ -1,12 +1,25 @@
 faire index.html
 
-kubctl get nodes
-kubctl describe nodes minikube(exple) (= docker inspect container)
-kubectl apply -f https://k8s.io/examples/debug/counter-pod.yaml
-kubectl logs "podsname"
+kubctl get ...
+kubctl get ... -o wide
+kubctl get all
+kubectl logs ... 
+kubctl describe ...
+kubectl create -f file.yaml
+kubectl apply -f file.yaml
+kubectl exec -ti ...
+kubectl delete
+kubctl get componentstatuses
+kubctl get daemonsets -n kube-system
 
 docker build -t img .
 docker run -tid --name cont img
 docker exec -ti cont sh
 docker stop cont
 docker rm cont
+docker inspect cont
+
+Testing vsftpd
+nc -zv 127.0.0.1 21
+
+https://forhjy.medium.com/42-ft-service-how-to-install-kubernetes-metallb-30d66f92d726
