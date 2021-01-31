@@ -1,9 +1,9 @@
 #nginx
-FROM alpine:3.13
+FROM alpine
 
 MAINTAINER blojowsk
 
-COPY monsite.conf set_autoindex.sh /
+COPY ./monsite.conf /
 
 VOLUME /sys/fs/cgroup
 
@@ -11,7 +11,7 @@ EXPOSE 80 443
 
 RUN apk update \
 && apk upgrade \
-&& apk add --no-cache nginx openrc openssl sed grep \
+&& apk add --no-cache nginx openrc openssl grep \
 && mkdir -p /run/openrc \
 && touch /run/openrc/softlevel \
 && mkdir -p /run/nginx \
