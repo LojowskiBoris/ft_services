@@ -25,3 +25,4 @@ RUN apk update \
     -subj "/C=FR/ST=RHONE/L=LYON/O=42/OU=Dev/CN=www.monsite.fr"
 
 CMD ["nginx", "-g", "daemon off;"]
+#CMD ["sh"]
