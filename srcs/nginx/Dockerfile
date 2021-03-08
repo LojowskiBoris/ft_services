@@ -3,25 +3,25 @@ FROM alpine
 
 MAINTAINER blojowsk
 
-COPY ./monsite.conf /
-
-VOLUME /sys/fs/cgroup
+COPY ./nginx.conf ./index.html /
 
 EXPOSE 80 443
 
 RUN apk update \
 && apk upgrade \
-&& apk add --no-cache nginx openrc openssl grep \
-&& mkdir -p /run/openrc \
-&& touch /run/openrc/softlevel \
+&& apk add --no-cache nginx openssl \
+&& adduser -D -g 'www' www \
 && mkdir -p /run/nginx \
-&& rm /etc/nginx/http.d/default.conf \
-&& mv /monsite.conf /etc/nginx/http.d \
-&& mkdir /var/www/monsite \
+&& mkdir /www \
+&& chown -R www:www /var/lib/nginx \
+&& chown -R www:www /www \
+&& mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig \
+&& mv /nginx.conf /etc/nginx/ \
+&& mv /index.html /www/ \
 && mkdir /etc/nginx/ssl \
 && openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/nginx/ssl/monsite.fr.key \
-    -out /etc/nginx/ssl/monsite.fr.crt \
+    -keyout /etc/nginx/ssl/nginx.fr.key \
+    -out /etc/nginx/ssl/nginx.fr.crt \
     -subj "/C=FR/ST=RHONE/L=LYON/O=42/OU=Dev/CN=www.monsite.fr"
 
 CMD ["nginx", "-g", "daemon off;"]
