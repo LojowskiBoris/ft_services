@@ -1,4 +1,10 @@
-faire index.html
+service <pending> ??????
+
+
+to see all command :
+	kubectl
+	minikube
+
 
 kubctl get ...
 kubctl get ... -o wide

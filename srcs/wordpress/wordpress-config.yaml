@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: wordpress-deployment
+    labels:
+        app: wordpress
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: wordpress
+    template:
+        metadata:
+            labels:
+                app: wordpress
+        spec:
+            containers:
+                - name: wordpress
+                  image: wordpress-image
+                  imagePullPolicy: Never
+                  env:
+                  - name: WORDPRESS_DB_HOST
+                    value: mysql-service
+                  - name: WORDPRESS_DB_PASSWORD
+                    valueFrom:
+                        secretKeyRef:
+                            name: wordpress-secret
+                            key: wp-db-password
+                  ports:
+                      - containerPort: 5050
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: wordpress-service
+spec:
+    type: LoadBalancer
+    selector:
+        app: wordpress
+    ports:
+        - protocol: TCP
+          port: 5050
+          targetPort: 5050

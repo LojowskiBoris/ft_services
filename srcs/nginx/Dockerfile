@@ -3,7 +3,7 @@ FROM alpine
 
 MAINTAINER blojowsk
 
-COPY ./nginx.conf ./index.html /
+COPY ./srcs/nginx.conf ./srcs/index.html /
 
 EXPOSE 80 443
 
@@ -25,4 +25,3 @@ RUN apk update \
     -subj "/C=FR/ST=RHONE/L=LYON/O=42/OU=Dev/CN=www.monsite.fr"
 
 CMD ["nginx", "-g", "daemon off;"]
-#CMD ["sh"]
