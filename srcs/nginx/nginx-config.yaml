@@ -26,12 +26,12 @@ spec:
                     containerPort: 80
                   - name: https-port
                     containerPort: 443
-                readinessProbe:
+                  readinessProbe:
                     tcpSocket:
                         port: 8080
                     initialDelaySeconds: 5
                     periodSeconds: 10
-                livenessProbe:
+                  livenessProbe:
                     tcpSocket:
                         port: 8080
                     initialDelaySeconds: 15
