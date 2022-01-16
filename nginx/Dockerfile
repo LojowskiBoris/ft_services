@@ -3,9 +3,9 @@ FROM alpine
 
 MAINTAINER blojowsk
 
-COPY ./srcs/nginx.conf ./srcs/index.html /
+#EXPOSE 80 443
 
-EXPOSE 80 443
+COPY ./nginx.conf ./index.html /
 
 RUN apk update \
 && apk upgrade \
@@ -22,6 +22,6 @@ RUN apk update \
 && openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/nginx.fr.key \
     -out /etc/nginx/ssl/nginx.fr.crt \
-    -subj "/C=FR/ST=RHONE/L=LYON/O=42/OU=Dev/CN=www.monsite.fr"
+    -subj "/C=FR/ST=RHONE/L=LYON/O=42/OU=Dev/CN=blojowsk"
 
 CMD ["nginx", "-g", "daemon off;"]
