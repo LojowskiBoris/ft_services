@@ -1,0 +1,69 @@
+version: "3"
+
+networks:
+        net:
+
+volumes:
+        wordpress:
+                driver: local
+                driver_opts:
+                        device: ${WORDPRESS_VOLUME}
+                        o: bind
+                        type: none
+        mariadb:
+                driver: local
+                driver_opts:
+                        device: ${MARIADB_VOLUME}
+                        o: bind
+                        type: none
+
+
+services:
+        nginx:
+                depends_on:
+                        - wordpress
+                container_name: nginx
+                build:
+                        context: ./requirements/nginx
+                        args:
+                                - DOMAIN_NAME=${DOMAIN_NAME}
+                image: nginx
+                ports:
+                        - "443:443"
+                volumes:
+                        - wordpress:/var/www/html/wordpress
+                networks:
+                        - net
+                restart: always
+        wordpress:
+                depends_on:
+                        - mariadb
+                container_name: wordpress
+                build: ./requirements/wordpress
+                image: wordpress
+                environment:
+                        - MYSQL_DB=${MYSQL_DB}
+                        - MYSQL_USER=${MYSQL_USER}
+                        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+                        - MYSQL_HOST=${MYSQL_HOST}
+                volumes:
+                        - wordpress:/var/www/html/wordpress
+                networks:
+                        - net
+                restart: always
+        mariadb:
+                container_name: mariadb
+                build: ./requirements/mariadb
+                environment:
+                        - MYSQL_DB=${MYSQL_DB}
+                        - MYSQL_USER=${MYSQL_USER}
+                        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+                        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+                image: mariadb
+                ports:
+                        - "3306:3306"
+                volumes:
+                        - mariadb:/var/lib/mysql
+                networks:
+                        - net
+                restart: always
