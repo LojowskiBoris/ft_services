@@ -4,9 +4,7 @@ EXPOSE 3306
 
 RUN apt-get update \
 && apt-get upgrade -y \
-&& apt-get -y install mariadb-server mariadb-client \
-&& mkdir -p /var/run/mysqld \
-&& chown -R mysql:mysql /var/run/mysqld
+&& apt-get -y install mariadb-server mariadb-client
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY ./tools/create_database.sh /usr/local/bin/
