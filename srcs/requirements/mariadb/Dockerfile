@@ -7,18 +7,16 @@ RUN apt-get update \
 && apt-get -y install mariadb-server mariadb-client
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY ./tools/create_database.sh /usr/local/bin/
-COPY ./conf/wordpress.sql /usr/local/bin/
+COPY ./tools/create_database.sh /
+COPY ./conf/wordpress.sql /
 
-#comment this
-RUN chmod +x /usr/local/bin/create_database.sh \
-&& chmod +x /usr/local/bin/wordpress.sql
+ARG MYSQL_DB
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+ARG MYSQL_ROOT_PASSWORD
 
-ENTRYPOINT ["create_database.sh", "mysqld_safe"]
-
-#try this with 2 last instructions in create_database.sh in comment
-RUN chmod +x /create_database.sh && chmod +x /wordpress.sql \
+RUN chmod +x /create_database.sh /wordpress.sql \
 && /create_database.sh \
-&& rm /create_database.sh && rm /wordpress.sql
+&& rm /create_database.sh /wordpress.sql
 
-ENTRYPOINT ["mysqld_safe"]
+CMD ["mysqld_safe"]

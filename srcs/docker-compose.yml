@@ -53,7 +53,13 @@ services:
                 restart: always
         mariadb:
                 container_name: mariadb
-                build: ./requirements/mariadb
+                build:
+                        context: ./requirements/mariadb
+                        args:
+                                - MYSQL_DB=${MYSQL_DB}
+                                - MYSQL_USER=${MYSQL_USER}
+                                - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+                                - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
                 environment:
                         - MYSQL_DB=${MYSQL_DB}
                         - MYSQL_USER=${MYSQL_USER}
