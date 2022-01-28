@@ -28,6 +28,6 @@ https://github.com/iusrepo/php72u/issues/19
 
 mariadb:
 
-
 mysqld_safe:
+https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-via-a-shell-script
 https://mariadb.com/kb/en/mysqld_safe/
