@@ -27,7 +27,8 @@ https://serverfault.com/questions/786398/how-do-i-start-php7-0-fpm-with-supervis
 https://github.com/iusrepo/php72u/issues/19
 
 mariadb:
+https://www.geek17.com/fr/content/debian-10-buster-installer-et-configurer-mariadb-107
+https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-via-a-shell-script
 
 mysqld_safe:
 https://mariadb.com/kb/en/mysqld_safe/
-https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-via-a-shell-script
